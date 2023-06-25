@@ -12,7 +12,7 @@ func main () {
     file, err := os.Open("input.txt")
 
     if err != nil {
-        fmt.Printf("Failed to open the CSV file: %s", "input.csv")
+        fmt.Printf("Failed to open the txt file: %s", "input.txt")
         panic(0)
     }
     defer file.Close()
