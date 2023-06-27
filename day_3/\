@@ -1,0 +1,61 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"log"
+	"os"
+	"strings"
+)
+
+func priority(line string) (value int) {
+  n := len(line)
+  left := line[:n/2] 
+  right := line[n/2+1:]
+  var item rune 
+
+  looper:
+  for _, ruckl := range left {
+    for _, ruckr := range right {
+      if ruckl == ruckr {
+        item = ruckl
+        fmt.Println(item)
+        break looper 
+      }
+    }
+  }
+
+  x := int(rune(item))
+
+  if x < 97{
+    return int(rune(item)-38)
+  } 
+  if x >= 97{
+    return int(rune(item)-96)
+  }
+  return 90000
+}
+
+func main() {
+  file, err := os.Open("./testinput.txt")
+  if err != nil {
+    log.Fatal(err)
+  }
+  defer file.Close()
+
+  total := 0
+
+  // Get contents of rucksack for each line
+  scanner := bufio.NewScanner(file)
+  for scanner.Scan() {
+    line := scanner.Text()
+    strings.Split(line, " ")
+
+    numb := priority(line)
+    fmt.Printf("%v ", numb)
+    //fmt.Println(int(rune('M')-38))
+    total += numb 
+  }
+
+  fmt.Printf("Total is: %d", total)
+}
